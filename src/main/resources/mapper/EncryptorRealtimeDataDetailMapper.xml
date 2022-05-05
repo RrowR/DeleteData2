@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.mapper.EncryptorRealtimeDataDetailMapper">
+
+    <resultMap id="BaseResultMap" type="com.study.domain.EncryptorRealtimeDataDetail">
+            <id property="type" column="TYPE" jdbcType="VARCHAR"/>
+            <id property="date" column="DATE" jdbcType="VARCHAR"/>
+            <id property="ip" column="IP" jdbcType="VARCHAR"/>
+            <result property="value" column="VALUE" jdbcType="VARCHAR"/>
+            <result property="collecttime" column="COLLECTTIME" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+            <!--@mbg.generated-->
+            TYPE, DATE, IP, VALUE, COLLECTTIME
+    </sql>
+    <insert id="insertBatch" parameterType="java.util.List">
+            <!--@mbg.generated-->
+            insert into encryptor_realtime_data_detail (TYPE, DATE, IP, VALUE, COLLECTTIME) values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.type}, #{item.date}, #{item.ip}, #{item.value}, #{item.collecttime})
+        </foreach>
+    </insert>
+
+    <delete id="deleteByCollectTime" parameterType="java.lang.Integer">
+        delete from encryptor_realtime_data_detail where DATE(COLLECTTIME) &lt;= DATE(DATE_SUB(NOW(), INTERVAL #{collectTime} HOUR));
+    </delete>
+</mapper>

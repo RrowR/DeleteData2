@@ -1,0 +1,18 @@
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://ecs01:3306/testDelete?serverTimezone=UTC&rewriteBatchedStatements=true
+        username: test
+        password: test
+        type: com.alibaba.druid.pool.DruidDataSource
+        druid:
+            max-active: 10
+            min-idle: 2
+            validation-query: select count(1) from user
+            validation-query-timeout: 3
+
+mybatis-plus:
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    mapper-locations: mapper/*.xml
+
