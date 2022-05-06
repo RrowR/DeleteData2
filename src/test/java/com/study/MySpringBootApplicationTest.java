@@ -27,12 +27,14 @@ public class MySpringBootApplicationTest {
     void TestBatchInsert() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         ArrayList<EncryptorRealtimeDataDetail> list = new ArrayList<>();
-        for (int i = 0; i < 10000; i++) {
-            EncryptorRealtimeDataDetail detail = new EncryptorRealtimeDataDetail(String.valueOf(i), String.valueOf(i), String.valueOf(i), String.valueOf(i), dateFormat.format(new Date()));
-            System.out.println(detail);
-            list.add(detail);
+        for (int j = 0; j < 150; j++) {
+            for (int i = 0; i < 10000; i++) {
+                EncryptorRealtimeDataDetail detail = new EncryptorRealtimeDataDetail(String.valueOf(i), String.valueOf(i), String.valueOf(i), String.valueOf(i), dateFormat.format(new Date()));
+                System.out.println(detail);
+                list.add(detail);
+            }
+            encryptorRealtimeDataDetailService.insertBatch(list);
         }
-        encryptorRealtimeDataDetailService.insertBatch(list);
     }
 
     @Test
